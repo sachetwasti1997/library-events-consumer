@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: local
+server:
+  port: 8081
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092, localhost:9093, localhost:9094
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: library-events-listener-group
+      properties:
+        retries: 10
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library_db
+    username: root
+    password: Wasti786@
+  jpa:
+    generate-ddl: true
